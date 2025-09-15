@@ -1,0 +1,36 @@
+<div class="centered-container">
+  <h2>Mis Tareas</h2>
+
+  <div class="task-input-container">
+    <mat-form-field appearance="outline" class="task-input">
+      <mat-label>Nueva tarea</mat-label>
+      <input matInput [(ngModel)]="newTaskTitle" (keyup.enter)="addTask()" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addTask()">Agregar</button>
+  </div>
+
+  @if (loading) {
+  <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+  } @else { @if (error) {
+  <p class="error">{{ error }}</p>
+  } @else { @if (tasks.length === 0) {
+  <p class="no-tasks">No hay tareas por ahora ✅</p>
+  } @else {
+  <mat-list>
+    @for (task of tasks; track task.id) {
+    <mat-list-item>
+      <mat-checkbox [checked]="task.completed" (change)="toggleTask(task)"> </mat-checkbox>
+
+      <span class="task-title" [class.completed]="task.completed">
+        {{ task.title }}
+      </span>
+
+      <button mat-icon-button color="warn" (click)="deleteTask(task)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+    }
+  </mat-list>
+  } } }
+</div>

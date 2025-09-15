@@ -1,0 +1,201 @@
+<section class="Formulario">
+  <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <div class="parent">
+      <!-- Imagen -->
+      <div class="imagen">
+        <img src="img/pato.png" alt="imagen" />
+      </div>
+
+      <!-- Nombre -->
+      <div class="div1">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            placeholder="Ingresa tu nombre"
+            formControlName="nombre"
+            autocomplete="given-name"
+          />
+          <mat-error *ngIf="getError('nombre')">{{ getError('nombre') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Apellido -->
+      <div class="div2">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Apellido</mat-label>
+          <input
+            matInput
+            placeholder="Ingresa tu apellido"
+            formControlName="apellido"
+            autocomplete="family-name"
+          />
+          <mat-error *ngIf="getError('apellido')">{{ getError('apellido') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- DNI -->
+      <div class="div3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>DNI</mat-label>
+          <input
+            matInput
+            type="text"
+            maxlength="15"
+            placeholder="Ingresa tu DNI"
+            formControlName="dni"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="getError('dni')">{{ getError('dni') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Correo -->
+      <div class="div4">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Ingresa tu correo"
+            formControlName="correo"
+            autocomplete="email"
+          />
+          <mat-error *ngIf="getError('correo')">{{ getError('correo') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="div5">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input
+            matInput
+            type="tel"
+            maxlength="15"
+            placeholder="Ingresa tu teléfono"
+            formControlName="telefono"
+            autocomplete="tel"
+          />
+          <mat-error *ngIf="getError('telefono')">{{ getError('telefono') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Dirección -->
+      <div class="div6">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Dirección</mat-label>
+          <textarea
+            matInput
+            placeholder="Ingresa tu dirección"
+            formControlName="direccion"
+            autocomplete="street-address"
+          ></textarea>
+          <mat-error *ngIf="getError('direccion')">{{ getError('direccion') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- País -->
+      <div class="div7">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="pais">
+            <mat-option *ngFor="let p of paises" [value]="p.id">
+              {{ p.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="getError('pais')">{{ getError('pais') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Departamento -->
+      <div class="div8">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="departamento">
+            <mat-option *ngFor="let d of departamentos" [value]="d.id">
+              {{ d.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="getError('departamento')">{{ getError('departamento') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Provincia -->
+      <div class="div9">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Provincia</mat-label>
+          <mat-select formControlName="provincia">
+            <mat-option *ngFor="let pr of provincias" [value]="pr.id">
+              {{ pr.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="getError('provincia')">{{ getError('provincia') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Distrito -->
+      <div class="div10">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Distrito</mat-label>
+          <mat-select formControlName="distrito">
+            <mat-option *ngFor="let di of distritos" [value]="di.id">
+              {{ di.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="getError('distrito')">{{ getError('distrito') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Coordenadas -->
+      <div class="div11">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Coordenadas</mat-label>
+          <input
+            matInput
+            placeholder="Ingresa coordenadas"
+            formControlName="coordenadas"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="getError('coordenadas')">{{ getError('coordenadas') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Código Postal -->
+      <div class="div12">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Código Postal</mat-label>
+          <input
+            matInput
+            placeholder="Ingresa tu código postal"
+            formControlName="codpostal"
+            autocomplete="postal-code"
+          />
+          <mat-error *ngIf="getError('codpostal')">{{ getError('codpostal') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Botón Cancelar -->
+      <div class="div13">
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          class="full-width"
+          (click)="onCancel()"
+        >
+          <mat-icon>cancel</mat-icon>
+          <span>Cancelar</span>
+        </button>
+      </div>
+
+      <!-- Botón Enviar -->
+      <div class="div14">
+        <button mat-raised-button color="primary" type="submit" class="full-width">
+          <mat-icon>send</mat-icon>
+          <span>Enviar</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

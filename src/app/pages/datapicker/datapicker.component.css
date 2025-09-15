@@ -1,0 +1,121 @@
+/* ====== General ====== */
+/* ====== Contenedor centrado ====== */
+.datapicker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* ocupa toda la pantalla */
+  background: linear-gradient(135deg, #e0f2fe, #f0f9ff); /* degradado piola */
+  padding: 2rem;
+}
+
+.datapicker-wrapper {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.datapicker-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+
+:host {
+  display: block;
+  padding: 1rem;
+  background: #f8fafc; /* gris azulado suave */
+  border-radius: 1rem;
+}
+
+/* ====== Mat Form Fields ====== */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+mat-form-field.mat-form-field {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+mat-form-field.mat-form-field:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.mat-form-field-label {
+  font-weight: 600;
+  color: #374151; /* gris oscuro */
+}
+
+.mat-input-element {
+  font-size: 1rem;
+  padding: 0.4rem 0;
+}
+
+/* ====== Select ====== */
+.mat-select {
+  font-size: 1rem;
+}
+
+.mat-option {
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+}
+
+/* ====== Textarea ====== */
+textarea.mat-input-element {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ====== Password toggle ====== */
+button[matIconButton] {
+  color: #64748b;
+  transition: color 0.2s;
+}
+button[matIconButton]:hover {
+  color: #1d4ed8; /* azul */
+}
+
+/* ====== Amount input ====== */
+.example-right-align {
+  text-align: right;
+  font-weight: 600;
+}
+
+/* ====== Buttons ====== */
+.example-button-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button[matButton], 
+a[matButton] {
+  background: #1d4ed8; /* azul */
+  color: white !important;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button[matButton]:hover,
+a[matButton]:hover {
+  background: #2563eb; /* azul un poco más claro */
+  transform: translateY(-2px);
+}
+
+button[matButton][disabled] {
+  background: #cbd5e1 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed;
+}

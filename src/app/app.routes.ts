@@ -1,3 +1,27 @@
 import { Routes } from '@angular/router';
+import { Holamundo } from './pages/holamundo/holamundo';
+import { PruebasComponent } from './component/pruebas/pruebas.component';
+import { TaskComponent } from './pages/task/task.component';
+import { DatapickerComponent } from './pages/datapicker/datapicker.component';
+import { HomeworkComponent } from './pages/homework/homework.component';
+import { PersonaPage } from './features/personas/pages/persona/persona';
+export const routes: Routes = [
+  {
+    path: 'holamundo',
+    component: Holamundo,
+  },
+  {
+    path: 'pruebas',
+    component: PruebasComponent,
+  },
+  { path: 'picker', component: DatapickerComponent 
+    
+  },
+  { path: 'tarea', component: HomeworkComponent
 
-export const routes: Routes = [];
+  },
+  {
+    path: '', component: TaskComponent
+  },
+  {path: 'persona', component: PersonaPage}
+];

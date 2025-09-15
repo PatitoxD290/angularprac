@@ -1,0 +1,19 @@
+<div class="persona-container">
+
+  <!-- Botón para mostrar/ocultar formulario -->
+  <button mat-raised-button color="primary" (click)="toggleFormulario()">
+    <mat-icon>{{ mostrarFormulario ? 'close' : 'person_add' }}</mat-icon>
+    {{ mostrarFormulario ? 'Cerrar formulario' : 'Agregar persona' }}
+  </button>
+
+  <!-- Formulario -->
+  <div *ngIf="mostrarFormulario">
+    <app-persona-form></app-persona-form>
+  </div>
+
+  <!-- Lista -->
+  <div>
+    <app-persona-list></app-persona-list>
+  </div>
+
+</div>

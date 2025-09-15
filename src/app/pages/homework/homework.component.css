@@ -1,0 +1,110 @@
+/* Sección principal: centra el formulario en la página */
+.Formulario {
+  display: flex;
+  justify-content: center;  /* centra horizontal */
+  align-items: center;      /* centra vertical */
+  min-height: 100vh;        /* ocupa toda la pantalla */
+  background: #f4f6f9;      /* color de fondo suave */
+  padding: 2rem;
+}
+
+/* Caja del formulario */
+.parent {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-width: 1000px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr; /* primera col fija para imagen */
+  grid-template-rows: repeat(5, auto);
+  gap: 16px;
+  align-items: center; /* alinear todos los elementos al centro */
+}
+
+/* Imagen a la izquierda dentro del formulario */
+.imagen {
+  grid-column: 1 / 2;       /* primera columna */
+  grid-row: 1 / span 5;     /* ocupa todas las filas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen img {
+  width: 200px;     /* ancho fijo */
+  height: 400px;    /* alto fijo */
+  object-fit: cover; /* recorta la imagen para que no se deforme */
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Nombre */
+.div1 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 2;
+}
+
+/* Apellido */
+.div2 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 4;
+}
+
+/* DNI */
+.div3 {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+/* Fecha de nacimiento */
+.div4 {
+  grid-column-start: 3;
+  grid-row-start: 2;
+}
+
+/* Dirección */
+.div5 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 4;
+  grid-row-start: 2;
+}
+
+/* Usuario */
+.div6 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 3;
+  grid-row-start: 3;
+}
+
+/* Contraseña */
+.div7 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 3;
+  grid-row-start: 4;
+}
+
+/* Botón enviar */
+.div8 {
+  grid-column-start: 4;
+  grid-row-start: 5;
+  text-align: center;
+}
+
+/* Botón cancelar */
+.div9 {
+  grid-column-start: 3;
+  grid-row-start: 5;
+  text-align: center;
+}
+
+/* Ajustes generales */
+mat-form-field {
+  width: 100%;
+}
+
+button[mat-fab], button[mat-raised-button] {
+  border-radius: 2rem;
+}

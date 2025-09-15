@@ -1,0 +1,72 @@
+/* Sección principal: centra el formulario en la página */
+.Formulario {
+  display: flex;
+  justify-content: center;   /* centra horizontal */
+  align-items: center;       /* centra vertical */
+  min-height: 100vh;         /* ocupa toda la pantalla */
+  background: #f4f6f9;       /* color de fondo suave */
+  padding: 2rem;
+}
+
+/* Caja del formulario */
+.parent {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-width: 1200px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr; /* primera columna fija para imagen */
+  grid-template-rows: repeat(6, auto);
+  gap: 16px;
+  align-items: center;
+}
+
+/* Imagen a la izquierda */
+.imagen {
+  grid-column: 1 / 2;       /* primera columna */
+  grid-row: 1 / span 6;     /* ocupa todas las filas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen img {
+  width: 220px;
+  height: 420px;
+  object-fit: cover;        /* recorta la imagen sin deformarla */
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Campos: ubicación en la cuadrícula */
+.div1 { grid-column: 2 / 3; } /* Nombre */
+.div2 { grid-column: 3 / 4; } /* Apellido */
+.div3 { grid-column: 4 / 5; } /* DNI */
+
+.div4 { grid-column: 2 / 3; grid-row: 2; } /* Correo */
+.div5 { grid-column: 3 / 4; grid-row: 2; } /* Teléfono */
+.div6 { grid-column: 4 / 5; grid-row: 2; } /* Dirección */
+
+.div7 { grid-column: 2 / 3; grid-row: 3; } /* País */
+.div8 { grid-column: 3 / 4; grid-row: 3; } /* Departamento */
+.div9 { grid-column: 4 / 5; grid-row: 3; } /* Provincia */
+
+.div10 { grid-column: 2 / 3; grid-row: 4; } /* Distrito */
+.div11 { grid-column: 3 / 4; grid-row: 4; } /* Coordenadas */
+.div12 { grid-column: 4 / 5; grid-row: 4; } /* Código Postal */
+
+.div13 { grid-column: 3 / 4; grid-row: 5; text-align: center; } /* Botón cancelar */
+.div14 { grid-column: 4 / 5; grid-row: 5; text-align: center; } /* Botón enviar */
+
+/* Ajustes generales */
+mat-form-field {
+  width: 100%;
+}
+
+button[mat-raised-button] {
+  border-radius: 2rem;
+  padding: 0.75rem 2rem;
+}

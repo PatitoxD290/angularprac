@@ -1,0 +1,18 @@
+<input [(ngModel)]="nombre" placeholder="escribe tu name pe papito"> <br>
+
+<p>Hola, {{nombre}}!</p>
+
+@if (nombre === usuarioActivo.nombre){
+    <p>Welcome, {{nombre}}</p>
+}
+
+@if (productos.length > 0){
+    <h1>lista de productos</h1>
+<ul>
+    @for (producto of productos; track producto.id){
+        <li> {{producto.nombre}} - $/. {{producto.precio}}</li>
+    }
+</ul>
+}@else {
+    <p>no hay nada.</p>
+}

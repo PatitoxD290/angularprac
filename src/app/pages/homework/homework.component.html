@@ -1,0 +1,125 @@
+<section class="Formulario">
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <div class="parent">
+      <!-- Imagen -->
+      <div class="imagen">
+        <img src="img/pato.png" alt="imagen creo" />
+      </div>
+
+      <!-- Nombre -->
+      <div class="div1">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Ingresa tu nombre" formControlName="nombre" />
+          <mat-error *ngIf="getError('nombre')">{{ getError('nombre') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Apellido -->
+      <div class="div2">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Apellido</mat-label>
+          <input matInput placeholder="Ingresa tu apellido" formControlName="apellido" />
+          <mat-error *ngIf="getError('apellido')">{{ getError('apellido') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- DNI -->
+      <div class="div3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>DNI</mat-label>
+          <input
+            matInput
+            type="text"
+            maxlength="8"
+            placeholder="Ingresa tu DNI"
+            formControlName="dni"
+            (keypress)="allowOnlyNumbers($event)"
+          />
+          <mat-error *ngIf="getError('dni')">{{ getError('dni') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="div4">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaNacimiento"
+            readonly
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="getError('fechaNacimiento')">{{ getError('fechaNacimiento') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Dirección -->
+      <div class="div5">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Dirección</mat-label>
+          <textarea matInput placeholder="Ingresa tu dirección" formControlName="direccion"></textarea>
+          <mat-error *ngIf="getError('direccion')">{{ getError('direccion') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Usuario -->
+      <div class="div6">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="Ingresa tu usuario" formControlName="usuario" />
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-error *ngIf="getError('usuario')">{{ getError('usuario') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="div7">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            [type]="hide() ? 'password' : 'text'"
+            placeholder="Ingresa tu contraseña"
+            formControlName="contrasena"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            type="button"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="getError('contrasena')">{{ getError('contrasena') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Botón Cancelar -->
+      <div class="div9">
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          class="full-width"
+          (click)="onCancel()"
+        >
+          <mat-icon>cancel</mat-icon>
+          Cancelar
+        </button>
+      </div>
+
+      <!-- Botón Enviar -->
+      <div class="div8">
+        <button mat-raised-button color="primary" type="submit" class="full-width">
+          <mat-icon>send</mat-icon>
+          Enviar
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

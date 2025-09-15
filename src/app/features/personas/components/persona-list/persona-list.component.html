@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Lista de Personas</h2>
+
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Distrito</th>
+        <th>Provincia</th>
+        <th>Departamento</th>
+        <th>País</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of personas">
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.apellido }}</td>
+        <td>{{ p.dni }}</td>
+        <td>{{ p.correo }}</td>
+        <td>{{ p.telefono }}</td>
+        <td>{{ p.direccion?.codpostal }} ({{ p.direccion?.coordenadas }})</td>
+        <td>{{ p.distrito?.nombre }}</td>
+        <td>{{ p.provincia?.nombre }}</td>
+        <td>{{ p.departamento?.nombre }}</td>
+        <td>{{ p.pais?.nombre }}</td>
+        <td>
+          <button (click)="onEditar(p)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
