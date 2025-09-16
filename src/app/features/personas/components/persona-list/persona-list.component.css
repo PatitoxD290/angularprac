@@ -1,0 +1,38 @@
+.Personas {
+  margin: 1.5rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #3f51b5; /* azul Material */
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.mat-cell {
+  color: #555;
+}
+
+tr.mat-row:hover {
+  background-color: #f9f9f9;
+}
+
+button {
+  margin-right: 0.4rem;
+  border-radius: 6px;
+  font-weight: 500;
+}

@@ -9,14 +9,22 @@
   "usuarios": [],
   "persona": [
     {
-      "id": "0de3",
+      "id": "30c5",
       "nombre": "Brayan",
       "apellido": "torrez",
       "dni": "72909750-8",
-      "correo": "Pato@gmail.com",
-      "telefono": "961613751",
-      "codpostal": "25000",
-      "dirrecion": "Manco Cápac 1061"
+      "correo": "pato@gmail.com",
+      "telefono": "956123759",
+      "id_direccion": "075f"
+    },
+    {
+      "id": "38bf",
+      "nombre": "Brayan",
+      "apellido": "torrez",
+      "dni": "12345678-9",
+      "correo": "a@hotmail.com",
+      "telefono": "123456789",
+      "id_direccion": "d14d"
     }
   ],
   "pais": [
@@ -523,5 +531,18 @@
       "id_provincia": 13
     }
   ],
-  "direccion": []
+  "direccion": [
+    {
+      "id": "075f",
+      "id_distrito": "2",
+      "codpostal": "25000",
+      "coordenadas": ""
+    },
+    {
+      "id": "d14d",
+      "id_distrito": "4",
+      "codpostal": "25000",
+      "coordenadas": ""
+    }
+  ]
 }

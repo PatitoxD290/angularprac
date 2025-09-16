@@ -1,16 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { UbicacionService, Direccion, Distrito, Provincia, Departamento, Pais } from '../services/direccion.service';
 
+// Persona base
+// Persona que ya existe en la BD
 export interface Persona {
-  id?: number;
+  id: number;
   nombre: string;
   apellido: string;
   dni: string;
   correo: string;
   telefono: string;
-  id_direcion: string;
+  id_direccion: number | string;
+}
+
+// Persona para crear (sin id)
+export type PersonaCreate = Omit<Persona, 'id'>;
+
+export interface PersonaConUbicacion extends Persona {
+  direccion?: Direccion | null;
+  distrito?: Distrito | null;
+  provincia?: Provincia | null;
+  departamento?: Departamento | null;
+  pais?: Pais | null;
 }
 
 @Injectable({
@@ -21,38 +34,34 @@ export class PersonaService {
 
   constructor(private http: HttpClient, private ubicacionService: UbicacionService) {}
 
-  // 🔹 Personas simples (sin relaciones)
+  // Personas simples
   getPersonas(): Observable<Persona[]> {
     return this.http.get<Persona[]>(this.apiUrl);
   }
 
-  // 🔹 Personas con datos relacionados (direccion, distrito, provincia, departamento, pais)
-  getPersonasConUbicacion() {
-    return forkJoin({
-      personas: this.http.get<Persona[]>(this.apiUrl),
-      direcciones: this.ubicacionService.getDirecciones(),
-      distritos: this.ubicacionService.getDistritos(),
-      provincias: this.ubicacionService.getProvincias(),
-      departamentos: this.ubicacionService.getDepartamentos(),
-      paises: this.ubicacionService.getPaises()
-    }).pipe(
-      map(({ personas, direcciones, distritos, provincias, departamentos, paises }) =>
-        personas.map(p => {
-          const direccion = direcciones.find(d => d.id === +p.id_direcion);
-          const distrito = direccion ? distritos.find(dis => dis.id === direccion.id_distrito) : null;
-          const provincia = distrito ? provincias.find(prov => prov.id === distrito.id_provincia) : null;
-          const departamento = provincia ? departamentos.find(dep => dep.id === provincia.id_departamento) : null;
-          const pais = departamento ? paises.find(pa => pa.id === departamento.id_pais) : null;
+  // Personas con relaciones
+  getPersonasConUbicacion(): Observable<PersonaConUbicacion[]> {
+    return this.http.get<Persona[]>(this.apiUrl).pipe(
+      switchMap(personas =>
+        forkJoin({
+          direcciones: this.ubicacionService.getDirecciones(),
+          distritos: this.ubicacionService.getDistritos(),
+          provincias: this.ubicacionService.getProvincias(),
+          departamentos: this.ubicacionService.getDepartamentos(),
+          paises: this.ubicacionService.getPaises()
+        }).pipe(
+          map(({ direcciones, distritos, provincias, departamentos, paises }) =>
+            personas.map(p => {
+              const direccion = direcciones.find(d => String(d.id) === String(p.id_direccion));
+              const distrito = direccion ? distritos.find(dis => String(dis.id) === String(direccion.id_distrito)) : null;
+              const provincia = distrito ? provincias.find(pr => String(pr.id) === String(distrito.id_provincia)) : null;
+              const departamento = provincia ? departamentos.find(dep => String(dep.id) === String(provincia.id_departamento)) : null;
+              const pais = departamento ? paises.find(pa => String(pa.id) === String(departamento.id_pais)) : null;
 
-          return {
-            ...p,
-            direccion,
-            distrito,
-            provincia,
-            departamento,
-            pais
-          };
-        })
+              return { ...p, direccion, distrito, provincia, departamento, pais };
+            })
+          )
+        )
       )
     );
   }
@@ -61,7 +70,8 @@ export class PersonaService {
     return this.http.get<Persona>(`${this.apiUrl}/${id}`);
   }
 
-  addPersona(persona: Persona): Observable<Persona> {
+  // 👇 Aquí usas PersonaCreate en vez de Persona
+  addPersona(persona: PersonaCreate): Observable<Persona> {
     return this.http.post<Persona>(this.apiUrl, persona);
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { PersonaService, Persona } from '../../../../core/services/persona.service';
-import { UbicacionService, Pais, Departamento, Provincia, Distrito } from '../../../../core/services/direccion.service';
+import { PersonaService, PersonaCreate } from '../../../../core/services/persona.service';
+import { UbicacionService, Pais, Departamento, Provincia, Distrito, Direccion } from '../../../../core/services/direccion.service';
 
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
@@ -49,28 +49,26 @@ export class PersonaFormComponent implements OnInit {
     this.personaForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/)]],
       apellido: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/)]],
-      dni: ['', [Validators.required, Validators.pattern(/^\d{8}-\d$/)]], // 8 dígitos + '-' + 1 dígito
+      dni: ['', [Validators.required, Validators.pattern(/^\d{8}-\d$/)]],
       correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{1,13}$/)]], // máx 13 dígitos
-      direccion: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{1,13}$/)]],
       pais: ['', Validators.required],
       departamento: ['', Validators.required],
       provincia: ['', Validators.required],
       distrito: ['', Validators.required],
-      coordenadas: [''],
       codpostal: ['', [Validators.required, Validators.pattern(/^[0-9]{4,10}$/)]],
+      coordenadas: [''],
+      direccion: ['', Validators.required],
     });
 
     // cargar países
-    this.ubicacionService.getPaises().subscribe(data => {
-      this.paises = data;
-    });
+    this.ubicacionService.getPaises().subscribe(data => this.paises = data);
 
-    // cuando cambia el país → filtrar departamentos
+    // filtrar departamentos
     this.personaForm.get('pais')?.valueChanges.subscribe(idPais => {
       if (idPais) {
         this.ubicacionService.getDepartamentos().subscribe(deps => {
-          this.departamentos = deps.filter(d => d.id_pais == idPais);
+          this.departamentos = deps.filter(d => d.id_pais.toString() === idPais.toString());
           this.provincias = [];
           this.distritos = [];
           this.personaForm.patchValue({ departamento: '', provincia: '', distrito: '' });
@@ -78,22 +76,22 @@ export class PersonaFormComponent implements OnInit {
       }
     });
 
-    // cuando cambia el departamento → filtrar provincias
+    // filtrar provincias
     this.personaForm.get('departamento')?.valueChanges.subscribe(idDep => {
       if (idDep) {
         this.ubicacionService.getProvincias().subscribe(provs => {
-          this.provincias = provs.filter(p => p.id_departamento == idDep);
+          this.provincias = provs.filter(p => p.id_departamento.toString() === idDep.toString());
           this.distritos = [];
           this.personaForm.patchValue({ provincia: '', distrito: '' });
         });
       }
     });
 
-    // cuando cambia la provincia → filtrar distritos
+    // filtrar distritos
     this.personaForm.get('provincia')?.valueChanges.subscribe(idProv => {
       if (idProv) {
         this.ubicacionService.getDistritos().subscribe(dists => {
-          this.distritos = dists.filter(d => d.id_provincia == idProv);
+          this.distritos = dists.filter(d => d.id_provincia.toString() === idProv.toString());
           this.personaForm.patchValue({ distrito: '' });
         });
       }
@@ -112,26 +110,42 @@ export class PersonaFormComponent implements OnInit {
 
     const formValue = this.personaForm.value;
 
-    // ✅ Se arma el objeto Persona quitando los campos que NO se deben enviar
-    const { pais, departamento, provincia, distrito, coordenadas, ...rest } = formValue;
+    // 1️⃣ Crear la dirección primero
+    const direccion: Direccion = {
+      id_distrito: formValue.distrito,
+      codpostal: formValue.codpostal,
+      coordenadas: formValue.coordenadas
+    };
 
-    const persona: Persona = {
-      ...rest,
-      dirrecion: formValue.direccion
-    } as Persona;
+    this.ubicacionService.addDireccion(direccion).subscribe({
+      next: (dirCreada) => {
+        // 2️⃣ Crear la persona con el id de la dirección recién creada
+        const persona: PersonaCreate = {
+          nombre: formValue.nombre,
+          apellido: formValue.apellido,
+          dni: formValue.dni,
+          correo: formValue.correo,
+          telefono: formValue.telefono,
+          id_direccion: dirCreada.id!
+        };
 
-    delete (persona as any).direccion;
-
-    this.personaService.addPersona(persona).subscribe({
-      next: () => {
-        this.loading = false;
-        this.success = 'Persona registrada con éxito';
-        this.personaForm.reset();
+        this.personaService.addPersona(persona).subscribe({
+          next: () => {
+            this.loading = false;
+            this.success = 'Persona registrada con éxito';
+            this.personaForm.reset();
+          },
+          error: (err) => {
+            this.loading = false;
+            console.error('Error al guardar persona:', err);
+            this.error = 'No se pudo registrar la persona';
+          }
+        });
       },
       error: (err) => {
         this.loading = false;
-        console.error('Error del backend:', err);
-        this.error = 'No se pudo registrar la persona';
+        console.error('Error al guardar dirección:', err);
+        this.error = 'No se pudo registrar la dirección';
       }
     });
   }
