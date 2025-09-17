@@ -5,6 +5,7 @@ import { TaskComponent } from './pages/task/task.component';
 import { DatapickerComponent } from './pages/datapicker/datapicker.component';
 import { HomeworkComponent } from './pages/homework/homework.component';
 import { PersonaPage } from './features/personas/pages/persona/persona';
+import { ProductoPage } from './features/productos/pages/producto/producto';
 export const routes: Routes = [
   {
     path: 'holamundo',
@@ -14,14 +15,12 @@ export const routes: Routes = [
     path: 'pruebas',
     component: PruebasComponent,
   },
-  { path: 'picker', component: DatapickerComponent 
-    
-  },
-  { path: 'tarea', component: HomeworkComponent
-
-  },
+  { path: 'picker', component: DatapickerComponent },
+  { path: 'tarea', component: HomeworkComponent },
   {
-    path: '', component: TaskComponent
+    path: '',
+    component: TaskComponent,
   },
-  {path: 'persona', component: PersonaPage}
+  { path: 'persona', component: PersonaPage },
+  { path: 'producto', component: ProductoPage },
 ];

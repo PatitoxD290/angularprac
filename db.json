@@ -9,15 +9,6 @@
   "usuarios": [],
   "persona": [
     {
-      "id": "30c5",
-      "nombre": "Brayan",
-      "apellido": "torrez",
-      "dni": "72909750-8",
-      "correo": "pato@gmail.com",
-      "telefono": "956123759",
-      "id_direccion": "075f"
-    },
-    {
       "id": "38bf",
       "nombre": "Brayan",
       "apellido": "torrez",
@@ -543,6 +534,17 @@
       "id_distrito": "4",
       "codpostal": "25000",
       "coordenadas": ""
+    }
+  ],
+  "producto": [
+    {
+      "id": "6c01",
+      "nombre": "xsads",
+      "descripcion": "dsadasdasd",
+      "cantidad": 15,
+      "categoria": "dsa",
+      "costo": 13,
+      "precioxunidad": 15
     }
   ]
 }

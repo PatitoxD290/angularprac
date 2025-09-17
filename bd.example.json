@@ -1,0 +1,66 @@
+{
+  "tasks": [
+    {
+      "id": "",
+      "title": "",
+      "completed": ""
+    }
+  ],
+  "usuarios": [],
+  "persona": [
+    {
+      "id": "",
+      "nombre": "",
+      "apellido": "",
+      "dni": "",
+      "correo": "",
+      "telefono": "",
+      "id_direccion": ""
+    }
+  ],
+  "pais": [
+    {
+      "id": "",
+      "nombre": ""
+    }
+  ],
+  "departamento": [
+    {
+      "id": "",
+      "nombre": "",
+      "id_pais": ""
+    }
+  ],
+  "provincia": [
+    {
+      "id": "",
+      "nombre": "",
+      "id_departamento": ""
+    }
+  ],
+  "distrito": [
+    {
+      "id": "",
+      "nombre": "",
+      "id_provincia": ""
+    }
+  ],
+  "direccion": [
+    {
+      "id": "",
+      "id_distrito": "",
+      "codpostal": "",
+      "coordenadas": ""
+    }
+  ],
+  "producto":[
+    {"id":"",
+    "nombre":"",
+    "descripcion":"",
+    "cantidad":"",
+    "categoria":"",
+    "costo":"",
+    "precioxunidad":""
+    }
+  ]
+}

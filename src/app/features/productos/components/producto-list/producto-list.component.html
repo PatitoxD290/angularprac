@@ -1,0 +1,54 @@
+<table mat-table [dataSource]="productos" class="mat-elevation-z8">
+
+  <!-- Nombre -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let p"> {{p.nombre}} </td>
+  </ng-container>
+
+  <!-- Descripción -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let p"> {{p.descripcion}} </td>
+  </ng-container>
+
+  <!-- Cantidad -->
+  <ng-container matColumnDef="cantidad">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let p"> {{p.cantidad}} </td>
+  </ng-container>
+
+  <!-- Categoría -->
+  <ng-container matColumnDef="categoria">
+    <th mat-header-cell *matHeaderCellDef> Categoría </th>
+    <td mat-cell *matCellDef="let p"> {{p.categoria}} </td>
+  </ng-container>
+
+  <!-- Costo -->
+  <ng-container matColumnDef="costo">
+    <th mat-header-cell *matHeaderCellDef> Costo </th>
+    <td mat-cell *matCellDef="let p"> {{p.costo | currency}} </td>
+  </ng-container>
+
+  <!-- Precio por unidad -->
+  <ng-container matColumnDef="precioxunidad">
+    <th mat-header-cell *matHeaderCellDef> Precio Unidad </th>
+    <td mat-cell *matCellDef="let p"> {{p.precioxunidad | currency}} </td>
+  </ng-container>
+
+  <!-- Acciones -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let p">
+      <button mat-icon-button color="primary" (click)="onEditar(p)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onEliminar(p.id!)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

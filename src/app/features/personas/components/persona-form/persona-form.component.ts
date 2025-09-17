@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { PersonaService, PersonaCreate } from '../../../../core/services/persona.service';
-import { UbicacionService, Pais, Departamento, Provincia, Distrito, Direccion } from '../../../../core/services/direccion.service';
+import { Pais, Departamento, Provincia, Distrito, Direccion } from '../../../../core/models/persona.model';
 
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
@@ -41,8 +41,7 @@ export class PersonaFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private personaService: PersonaService,
-    private ubicacionService: UbicacionService
+    private personaService: PersonaService
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +61,12 @@ export class PersonaFormComponent implements OnInit {
     });
 
     // cargar países
-    this.ubicacionService.getPaises().subscribe(data => this.paises = data);
+    this.personaService.getPaises().subscribe(data => this.paises = data);
 
     // filtrar departamentos
     this.personaForm.get('pais')?.valueChanges.subscribe(idPais => {
       if (idPais) {
-        this.ubicacionService.getDepartamentos().subscribe(deps => {
+        this.personaService.getDepartamentos().subscribe(deps => {
           this.departamentos = deps.filter(d => d.id_pais.toString() === idPais.toString());
           this.provincias = [];
           this.distritos = [];
@@ -79,7 +78,7 @@ export class PersonaFormComponent implements OnInit {
     // filtrar provincias
     this.personaForm.get('departamento')?.valueChanges.subscribe(idDep => {
       if (idDep) {
-        this.ubicacionService.getProvincias().subscribe(provs => {
+        this.personaService.getProvincias().subscribe(provs => {
           this.provincias = provs.filter(p => p.id_departamento.toString() === idDep.toString());
           this.distritos = [];
           this.personaForm.patchValue({ provincia: '', distrito: '' });
@@ -90,7 +89,7 @@ export class PersonaFormComponent implements OnInit {
     // filtrar distritos
     this.personaForm.get('provincia')?.valueChanges.subscribe(idProv => {
       if (idProv) {
-        this.ubicacionService.getDistritos().subscribe(dists => {
+        this.personaService.getDistritos().subscribe(dists => {
           this.distritos = dists.filter(d => d.id_provincia.toString() === idProv.toString());
           this.personaForm.patchValue({ distrito: '' });
         });
@@ -117,7 +116,7 @@ export class PersonaFormComponent implements OnInit {
       coordenadas: formValue.coordenadas
     };
 
-    this.ubicacionService.addDireccion(direccion).subscribe({
+    this.personaService.addDireccion(direccion).subscribe({
       next: (dirCreada) => {
         // 2️⃣ Crear la persona con el id de la dirección recién creada
         const persona: PersonaCreate = {

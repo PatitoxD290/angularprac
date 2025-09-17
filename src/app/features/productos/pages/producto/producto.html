@@ -1,0 +1,19 @@
+<div class="producto-container">
+
+  <!-- Botón para mostrar/ocultar formulario -->
+  <button mat-raised-button color="primary" (click)="toggleFormulario()">
+    <mat-icon>{{ mostrarFormulario ? 'close' : 'add_shopping_cart' }}</mat-icon>
+    {{ mostrarFormulario ? 'Cerrar formulario' : 'Agregar producto' }}
+  </button>
+
+  <!-- Formulario -->
+  <div *ngIf="mostrarFormulario">
+    <app-producto-form></app-producto-form>
+  </div>
+
+  <!-- Lista -->
+  <div>
+    <app-producto-list></app-producto-list>
+  </div>
+
+</div>

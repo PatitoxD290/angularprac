@@ -1,0 +1,45 @@
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="producto-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+    <mat-error *ngIf="getError('nombre')">{{ getError('nombre') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Descripción</mat-label>
+    <input matInput formControlName="descripcion" />
+    <mat-error *ngIf="getError('descripcion')">{{ getError('descripcion') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" formControlName="cantidad" />
+    <mat-error *ngIf="getError('cantidad')">{{ getError('cantidad') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Categoría</mat-label>
+    <input matInput formControlName="categoria" />
+    <mat-error *ngIf="getError('categoria')">{{ getError('categoria') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Costo</mat-label>
+    <input matInput type="number" formControlName="costo" />
+    <mat-error *ngIf="getError('costo')">{{ getError('costo') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Precio por unidad</mat-label>
+    <input matInput type="number" formControlName="precioxunidad" />
+    <mat-error *ngIf="getError('precioxunidad')">{{ getError('precioxunidad') }}</mat-error>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading">Guardar</button>
+    <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+  </div>
+
+  <p *ngIf="success" class="success">{{ success }}</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+</form>

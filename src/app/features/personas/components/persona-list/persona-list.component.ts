@@ -3,7 +3,8 @@ import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef } from '@ang
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PersonaService, Persona, PersonaConUbicacion } from '../../../../core/services/persona.service';
+import { PersonaService, PersonaConUbicacion } from '../../../../core/services/persona.service';
+import { Persona } from '../../../../core/models/persona.model';
 
 @Component({
   selector: 'app-persona-list',
